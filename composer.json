@@ -8,7 +8,7 @@
             "name": "Joey Claessen",
             "email": "joey_claessen@hotmail.com",
             "role": "Maintainer"
-        },
+        }
     ],
     "require": {
         "php": ">=8.0",
