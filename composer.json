@@ -8,11 +8,15 @@
             "name": "Joey Claessen",
             "email": "joey_claessen@hotmail.com",
             "role": "Maintainer"
+        },
+        {
+            "name": "Sam Mousa",
+            "email": "sam@mousa.nl",
+            "role": "Contributor"
         }
     ],
     "require": {
         "php": ">=8.0",
-
         "jc-it/yii2-job-queue": "^2.0"
     },
     "repositories": [
@@ -31,23 +35,7 @@
             "JCIT\\jobqueue\\tests\\": ["tests/"]
         }
     },
-    "scripts": {
-        "post-install-cmd": "cghooks add --ignore-lock",
-        "test": "vendor/bin/codecept run --coverage",
-        "lint": "vendor/bin/phpcs",
-        "lint-fix": "vendor/bin/phpcbf"
-    },
-    "extra": {
-        "hooks": {
-            "pre-commit": [
-                "echo committing as $(git config user.name) &&",
-                "composer lint-fix  &&",
-                "composer lint &&",
-                "composer test"
-            ],
-            "commit-msg": [
-                "npx commitlint -e"
-            ]
-        }
+    "require-dev": {
+        "squizlabs/php_codesniffer": "^3.6"
     }
 }

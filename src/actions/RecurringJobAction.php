@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace JCIT\jobqueue\actions;
@@ -20,7 +21,7 @@ class RecurringJobAction extends Action
         parent::__construct($id, $controller, $config);
     }
 
-    public function init()
+    public function init(): void
     {
         if (!$this->controller->module instanceof Application) {
             throw new InvalidConfigException('This action can only be used in a console application.');

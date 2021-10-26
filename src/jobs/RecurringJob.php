@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace JCIT\jobqueue\jobs;
@@ -9,7 +10,7 @@ class RecurringJob implements JobInterface
 {
     public static function fromArray(array $config): JobInterface
     {
-        return new static;
+        return new static();
     }
 
     public function jsonSerialize(): array

@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="PHP_CodeSniffer" xsi:noNamespaceSchemaLocation="vendor/squizlabs/php_codesniffer/phpcs.xsd">
-    <description>The coding standard for PHP_CodeSniffer itself.</description>
+    <description>The coding standard using PSR12</description>
 
     <file>src</file>
     <file>tests</file>
@@ -10,5 +10,6 @@
     <arg name="parallel" value="75"/>
     <arg value="np"/>
 
-    <rule ref="PSR2"/>
+    <rule ref="PSR12"/>
+
 </ruleset>
