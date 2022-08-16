@@ -13,7 +13,8 @@
     "require": {
         "php": ">=8.0",
 
-        "jc-it/yii2-job-queue": "^2.0"
+        "jc-it/yii2-job-queue": "^2.0",
+        "dragonmantank/cron-expression": "^3.3"
     },
     "repositories": [
         {
