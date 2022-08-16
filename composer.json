@@ -50,5 +50,10 @@
                 "npx commitlint -e"
             ]
         }
+    },
+    "config": {
+        "allow-plugins": {
+            "yiisoft/yii2-composer": true
+        }
     }
 }
