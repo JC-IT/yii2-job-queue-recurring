@@ -16,12 +16,7 @@
         "jc-it/yii2-job-queue": "^3.0",
         "dragonmantank/cron-expression": "^3.4"
     },
-    "repositories": [
-        {
-            "type": "composer",
-            "url": "https://asset-packagist.org"
-        }
-    ],
+    "repositories": [],
     "autoload": {
         "psr-4": {
             "JCIT\\jobqueue\\": ["src/"]
