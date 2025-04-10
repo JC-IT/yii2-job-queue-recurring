@@ -11,10 +11,10 @@
         }
     ],
     "require": {
-        "php": ">=8.0",
+        "php": ">=8.3",
 
-        "jc-it/yii2-job-queue": "^2.0",
-        "dragonmantank/cron-expression": "^3.3"
+        "jc-it/yii2-job-queue": "^3.0",
+        "dragonmantank/cron-expression": "^3.4"
     },
     "repositories": [
         {
@@ -33,7 +33,7 @@
         }
     },
     "scripts": {
-        "post-install-cmd": "cghooks add --ignore-lock",
+        "post-install-cmd": "vendor/bin/cghooks add --ignore-lock",
         "test": "vendor/bin/codecept run --coverage",
         "lint": "vendor/bin/phpcs",
         "lint-fix": "vendor/bin/phpcbf"
