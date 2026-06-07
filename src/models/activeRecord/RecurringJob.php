@@ -8,19 +8,24 @@ use JCIT\jobqueue\interfaces\JobFactoryInterface;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\db\Expression;
+use yii\validators\DefaultValueValidator;
 use yii\validators\InlineValidator;
+use yii\validators\NumberValidator;
 use yii\validators\RequiredValidator;
 use yii\validators\StringValidator;
 
 /**
- * @property int $id [int(11)]
- * @property string $name [varchar(255)]
+ * @property int $id
+ * @property string $name
  * @property string $description
  * @property string $cron
- * @property array $jobData [json]
- * @property int|null $queuedAt [timestamp]
- * @property int|null $createdAt [timestamp]
- * @property int|null $updatedAt [timestamp]
+ * @property int|null $priority
+ * @property int|null $delay
+ * @property int|null $ttr
+ * @property array $jobData
+ * @property string|null $queuedAt
+ * @property string|null $createdAt
+ * @property string|null $updatedAt
  *
  * @property-read bool $isDue
  */
@@ -54,6 +59,8 @@ class RecurringJob extends ActiveRecord
                 }
             }],
 
+            [['delay', 'priority', 'ttr'], DefaultValueValidator::class, 'value' => null],
+            [['delay', 'priority', 'ttr'], NumberValidator::class, 'integerOnly' => true, 'min' => 0],
             [['jobData'], function ($attribute, $params, InlineValidator $validator) {
                 try {
                     \Yii::createObject(JobFactoryInterface::class)->createFromArray($this->jobData);

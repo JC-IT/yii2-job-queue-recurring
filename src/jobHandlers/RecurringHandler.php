@@ -19,9 +19,10 @@ class RecurringHandler implements JobHandlerInterface
     public int $priority = 2048;
     public Closure $queryModifier;
     public string $queuedAtAttribute = 'queuedAt';
-    /** @var class-string */
-    public string $recurringJobClass = RecurringJob::class;
+    /** @var class-string<ActiveRecordRecurringJob> */
+    public string $recurringJobClass = ActiveRecordRecurringJob::class;
     public string $jobDataAttribute = 'jobData';
+    public int $ttr = 60;
 
     public function __construct(
         private JobFactoryInterface $jobFactory,
@@ -37,7 +38,7 @@ class RecurringHandler implements JobHandlerInterface
 
         $job = $this->jobFactory->createFromArray($recurringJob->{$this->jobDataAttribute});
 
-        if ($this->jobCreatedCallback) {
+        if (isset($this->jobCreatedCallback)) {
             ($this->jobCreatedCallback)($job, $recurringJob);
         }
 
@@ -47,7 +48,7 @@ class RecurringHandler implements JobHandlerInterface
     public function handle(JobInterface $job): void
     {
         $query = $this->recurringJobClass::find();
-        if ($this->queryModifier) {
+        if (isset($this->queryModifier)) {
             ($this->queryModifier)($query);
         }
 
@@ -56,9 +57,10 @@ class RecurringHandler implements JobHandlerInterface
             try {
                 if ($recurringJob->isDue) {
                     $this->jobQueue->putJob(
-                        $this->createJob($recurringJob),
-                        $this->priority,
-                        $this->delay
+                        job: $this->createJob($recurringJob),
+                        priority: $recurringJob->priority ?? $this->priority,
+                        delay: $recurringJob->delay ?? $this->delay,
+                        ttr: $recurringJob->ttr ?? $this->ttr,
                     );
                     if ($this->queuedAtAttribute) {
                         $recurringJob->touch($this->queuedAtAttribute);
